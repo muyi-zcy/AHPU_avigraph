@@ -16,6 +16,10 @@
         app:title="全景地图"
         app:titleTextColor="#ffffff">
     </android.support.v7.widget.Toolbar>
+    <TextView
+        android:id="@+id/snackbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="match_parent"

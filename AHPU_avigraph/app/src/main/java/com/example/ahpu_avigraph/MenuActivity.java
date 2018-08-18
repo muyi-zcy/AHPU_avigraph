@@ -32,6 +32,7 @@ public class MenuActivity extends AppCompatActivity {
         setting=(ImageView)findViewById(R.id.setting);//进入设置
         map=(ImageView)findViewById(R.id.map);//进入校园地图
 
+
         textview.setTypeface(Typeface.createFromAsset(getAssets(),"font/STHUPO.TTF"));
 
         setting.setOnClickListener(new View.OnClickListener(){   //前往注册

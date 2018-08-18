@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.baidu.lbsapi.BMapManager;
 import com.baidu.lbsapi.MKGeneralListener;
+import com.baidu.mapapi.SDKInitializer;
 
 public class PanoDemoApplication extends Application {
 
@@ -16,6 +17,7 @@ public class PanoDemoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        SDKInitializer.initialize(getApplicationContext());
         mInstance = this;
         initEngineManager(this);
     }

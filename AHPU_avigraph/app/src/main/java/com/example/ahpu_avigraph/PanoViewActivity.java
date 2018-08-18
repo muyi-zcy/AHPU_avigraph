@@ -1,6 +1,7 @@
 package com.example.ahpu_avigraph;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,8 +19,8 @@ public class PanoViewActivity extends Activity {
 
 
     private PanoramaView mPanoView;
-    private final double lat = 31.3415504776;
-    private final double lon = 118.4184424915;
+    private double lat=0;
+    private double lon = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,18 +34,19 @@ public class PanoViewActivity extends Activity {
             app.mBMapManager.init(new PanoDemoApplication.MyGeneralListener());
         }
         setContentView(R.layout.activity_pano_view);
+
+        Intent intent=getIntent();
+
+        int id= intent.getIntExtra("ID",0);
+
         mPanoView = (PanoramaView) findViewById(R.id.panorama);
         mPanoView.setPanoramaImageLevel(PanoramaView.ImageDefinition.ImageDefinitionHigh);
         mPanoView.setShowTopoLink(true);
 
-        mPanoView.setPanorama(lon, lat);
+        lon=Locations.latLngList.get(id).longitude;
+        lat=Locations.latLngList.get(id).latitude;
 
-//        IndoorAlbumPlugin.getInstance().init();
-//        mPanoView.setPanoramaZoomLevel(5);
-//        mPanoView.setArrowTextureByUrl("http://d.lanrentuku.com/down/png/0907/system-cd-disk/arrow-up.png");
-//        mPanoView.setPanoramaImageLevel(PanoramaView.ImageDefinition.ImageDefinitionMiddle);
-//        String uid = "f039c6dc17cb17becac3dbaf";
-//        mPanoView.setPanoramaByUid(uid, PanoramaView.PANOTYPE_STREET);
+        mPanoView.setPanorama(lon, lat);
         mPanoView.setPanoramaViewListener(new PanoramaViewListener() {
 
             @Override
