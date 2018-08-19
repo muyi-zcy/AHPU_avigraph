@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.lbsapi.model.BaiduPoiPanoData;
@@ -38,7 +37,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
-    TextView snackbar;
 
 
     private MapView mMapView;
@@ -47,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Marker> markerList = new ArrayList<>();
     ArrayList<Overlay> textList = new ArrayList<>();
+
     //构建MarkerOption，用于在地图上添加Marker
     private LatLng point;
     private myHandler handler;
@@ -81,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        snackbar=(TextView)findViewById(R.id.snackbar);
-
         mContext = this;
         handler = new myHandler();
         mMapView = (MapView) findViewById(R.id.bmapView);
@@ -115,22 +112,12 @@ public class MainActivity extends AppCompatActivity {
         textBuilder(Color.BLACK);
         view = LayoutInflater.from(mContext).inflate(R.layout.pano_overlay, null);
         pic = (ImageView) view.findViewById(R.id.panoImageView);
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, PanoViewActivity.class);
-//                intent.putExtra("latitude", latitude);
-//                intent.putExtra("longitude", longitude);
-//                startActivity(intent);
-//            }
-//        });
 
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
                 try {
                     Intent intent = new Intent(mContext, PanoViewActivity.class);
-//                    String s = String.valueOf(marker.getExtraInfo().get("ID"));
                     int s = Integer.valueOf(marker.getExtraInfo().getInt("ID"));
                     intent.putExtra("ID", s);
                     startActivity(intent);
@@ -179,12 +166,11 @@ public class MainActivity extends AppCompatActivity {
         int i = 0;
         for (LatLng ll : Locations.latLngList) {
             BitmapDescriptor descriptor = BitmapDescriptorFactory
-                    .fromResource(R.drawable.local);
+                    .fromResource(R.drawable.icon_markc);
             MarkerOptions markerOptions = new MarkerOptions().position(ll).icon(descriptor);
             markerOptions.animateType(MarkerOptions.MarkerAnimateType.grow);
             Marker marker = (Marker) mBaiduMap.addOverlay(markerOptions);
             Bundle bundle = new Bundle();
-//            bundle.putString("ID", (i++)+"");
             bundle.putInt("ID", i++);
             marker.setExtraInfo(bundle);
             markerList.add(marker);

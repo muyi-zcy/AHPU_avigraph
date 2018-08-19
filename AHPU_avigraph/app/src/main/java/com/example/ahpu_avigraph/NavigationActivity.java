@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -95,7 +94,7 @@ public class NavigationActivity extends AppCompatActivity {
         mMapView = (MapView) findViewById(R.id.mapview);
         initMapStatus();
         initOverlay();
-//        startPt = new LatLng(31.3415184040,118.4184639492);
+
         endPt = new LatLng(31.3493577815, 118.4186838903);
 
 //        walkParam = new WalkNaviLaunchParam().stPt(startPt).endPt(endPt);
@@ -141,7 +140,7 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
     public void initOverlay() {
-        // add marker overlay
+
         LatLng llA = new LatLng(31.3415184040,118.4184639492);
         LatLng llB = new LatLng(31.3415184040,118.4184639492);
 
@@ -162,9 +161,6 @@ public class NavigationActivity extends AppCompatActivity {
             public boolean onMarkerClick(final Marker marker) {
                 try {
                     int s = Integer.valueOf(marker.getExtraInfo().getInt("ID"));
-
-//                    endPt = new LatLng(Locations.latLngList.get(s).longitude,Locations.latLngList.get(s).latitude);
-                    //startPt = Locations.latLngList.get(0);
                     endPt=Locations.latLngList.get(s);
                     walkParam.stPt(startPt).endPt(endPt);
                     startWalkNavi();
@@ -188,7 +184,6 @@ public class NavigationActivity extends AppCompatActivity {
                 }else if(marker == mMarkerB){
                     endPt = marker.getPosition();
                 }
-
                 walkParam.stPt(startPt).endPt(endPt);
             }
 
@@ -200,22 +195,18 @@ public class NavigationActivity extends AppCompatActivity {
 
 
     private void startWalkNavi() {
-        Log.d("View", "startBikeNavi");
         try {
             mWNaviHelper.initNaviEngine(this, new IWEngineInitListener() {
                 @Override
                 public void engineInitSuccess() {
-                    Log.d("View", "engineInitSuccess");
                     routePlanWithWalkParam();
                 }
 
                 @Override
                 public void engineInitFail() {
-                    Log.d("View", "engineInitFail");
                 }
             });
         } catch (Exception e) {
-            Log.d("Exception", "startBikeNavi");
             e.printStackTrace();
         }
     }
@@ -226,14 +217,12 @@ public class NavigationActivity extends AppCompatActivity {
             @Override
             public void onRoutePlanStart() {
             }
-
             @Override
             public void onRoutePlanSuccess() {
                 Intent intent = new Intent();
                 intent.setClass(NavigationActivity.this, WNaviGuideActivity.class);
                 startActivity(intent);
             }
-
             @Override
             public void onRoutePlanFail(WalkRoutePlanError error) {
             }
@@ -243,14 +232,11 @@ public class NavigationActivity extends AppCompatActivity {
 
     private void requestPermission() {
         if (Build.VERSION.SDK_INT >= 23 && !isPermissionRequested) {
-
             isPermissionRequested = true;
-
             ArrayList<String> permissions = new ArrayList<>();
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             }
-
             if (permissions.size() == 0) {
                 return;
             } else {
@@ -281,12 +267,11 @@ public class NavigationActivity extends AppCompatActivity {
         int i = 0;
         for (LatLng ll : Locations.latLngList) {
             BitmapDescriptor descriptor = BitmapDescriptorFactory
-                    .fromResource(R.drawable.local);
+                    .fromResource(R.drawable.a);
             MarkerOptions markerOptions = new MarkerOptions().position(ll).icon(descriptor);
             markerOptions.animateType(MarkerOptions.MarkerAnimateType.grow);
             Marker marker = (Marker) mBaiduMap.addOverlay(markerOptions);
             Bundle bundle = new Bundle();
-//            bundle.putString("ID", (i++)+"");
             bundle.putInt("ID", i++);
             marker.setExtraInfo(bundle);
             markerList.add(marker);
@@ -307,10 +292,12 @@ public class NavigationActivity extends AppCompatActivity {
     private void navigateTo(BDLocation location) {
         if (isFirstLocate) {
             LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+            location.setCoorType("bd09ll");
 
             lon=location.getLongitude();
             lat=location.getLatitude();
             startPt = new LatLng(lat,lon);
+
             MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
             mBaiduMap.animateMapStatus(update);
             update = MapStatusUpdateFactory.zoomTo(16f);
@@ -331,6 +318,10 @@ public class NavigationActivity extends AppCompatActivity {
 
     private void initLocation(){
         LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        option.setCoorType("bd09ll");
+        option.setOpenGps(true);
+        option.setLocationNotify(true);
         option.setScanSpan(5000);
         option.setIsNeedAddress(true);
         mLocationClient.setLocOption(option);

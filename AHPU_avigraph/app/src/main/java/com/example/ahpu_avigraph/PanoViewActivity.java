@@ -40,8 +40,9 @@ public class PanoViewActivity extends Activity {
         int id= intent.getIntExtra("ID",0);
 
         mPanoView = (PanoramaView) findViewById(R.id.panorama);
-        mPanoView.setPanoramaImageLevel(PanoramaView.ImageDefinition.ImageDefinitionHigh);
+        mPanoView.setPanoramaImageLevel(Locations.code);
         mPanoView.setShowTopoLink(true);
+
 
         lon=Locations.latLngList.get(id).longitude;
         lat=Locations.latLngList.get(id).latitude;

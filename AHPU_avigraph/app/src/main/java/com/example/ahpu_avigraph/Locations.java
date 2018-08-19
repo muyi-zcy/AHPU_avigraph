@@ -1,10 +1,17 @@
 package com.example.ahpu_avigraph;
 
+import com.baidu.lbsapi.panoramaview.PanoramaView;
 import com.baidu.mapapi.model.LatLng;
 
 import java.util.ArrayList;
 
 public class Locations {
+    //设置全景清晰度
+    static boolean aswitch = true;
+    static PanoramaView.ImageDefinition code=PanoramaView.ImageDefinition.ImageDefinitionMiddle;
+
+    //校内建筑经纬度
+
     //安徽工程大学校门
     static final LatLng ahpu = new LatLng(31.3415184040,118.4184639492);
     //西门

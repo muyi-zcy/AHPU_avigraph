@@ -10,13 +10,20 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 public class MenuActivity extends AppCompatActivity {
 
     ImageView navigation;
     ImageView panorama;
     ImageView setting;
     ImageView map;
+    ImageView logo;
 
+    TextView a;
+    TextView b;
+    TextView c;
+    TextView d;
     TextView textview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +34,29 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         textview=(TextView)findViewById(R.id.text);
+        a=(TextView)findViewById(R.id.a);
+        b=(TextView)findViewById(R.id.b);
+        c=(TextView)findViewById(R.id.c);
+        d=(TextView)findViewById(R.id.d);
+
         navigation=(ImageView)findViewById(R.id.navigation);// 进入导航
         panorama=(ImageView)findViewById(R.id.panorama);//进入全景
         setting=(ImageView)findViewById(R.id.setting);//进入设置
         map=(ImageView)findViewById(R.id.map);//进入校园地图
-
+        logo=(ImageView)findViewById(R.id.logo);
 
         textview.setTypeface(Typeface.createFromAsset(getAssets(),"font/STHUPO.TTF"));
+        a.setTypeface(Typeface.createFromAsset(getAssets(),"font/STHUPO.TTF"));
+        b.setTypeface(Typeface.createFromAsset(getAssets(),"font/STHUPO.TTF"));
+        c.setTypeface(Typeface.createFromAsset(getAssets(),"font/STHUPO.TTF"));
+        d.setTypeface(Typeface.createFromAsset(getAssets(),"font/STHUPO.TTF"));
+
+
+
+        Glide.with(this)
+                .load(StartActivity.url)
+                .into(logo);
+
 
         setting.setOnClickListener(new View.OnClickListener(){   //前往注册
             @Override

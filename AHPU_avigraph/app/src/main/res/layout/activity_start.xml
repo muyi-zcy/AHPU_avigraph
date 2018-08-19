@@ -8,6 +8,7 @@
     tools:context=".StartActivity">
 
 <ImageView
+    android:id="@+id/logo"
     android:src="@drawable/img_startactivity"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="100dp"
@@ -19,7 +20,7 @@
     android:gravity="center"
     android:layout_marginBottom="90dp"
     android:layout_alignParentBottom ="true"
-    android:text="安徽工程大学校园导航"
+    android:text="安徽工程大学校园智慧交通"
     android:textColor="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
