@@ -10,7 +10,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.baidu.lbsapi.panoramaview.PanoramaView;
-
+    /*
+    设置
+     */
 public class SettingActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -43,7 +45,7 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        feedback.setOnClickListener(new View.OnClickListener(){   //前往注册
+        feedback.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent =new Intent(SettingActivity.this,FeedbackActivity.class);

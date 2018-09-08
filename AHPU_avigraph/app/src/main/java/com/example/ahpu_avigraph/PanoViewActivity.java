@@ -13,7 +13,7 @@ import com.baidu.lbsapi.panoramaview.PanoramaView;
 import com.baidu.lbsapi.panoramaview.PanoramaViewListener;
 
 /**
- * 全景Demo主Activity
+ * 全景Activity
  */
 public class PanoViewActivity extends Activity {
 

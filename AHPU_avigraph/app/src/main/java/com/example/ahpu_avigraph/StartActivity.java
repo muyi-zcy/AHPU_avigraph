@@ -41,6 +41,7 @@ public class StartActivity extends AppCompatActivity {
         public void handleMessage(android.os.Message msg) {
             Glide.with(mcontext)
                     .load(url)
+                    .placeholder(R.drawable.img_startactivity)
                     .into(logoview);
         };
     };
@@ -97,8 +98,8 @@ public class StartActivity extends AppCompatActivity {
     private void link() {
         String imei = Settings.Secure.getString(getContentResolver(),Settings.Secure.ANDROID_ID);
         String imeiUrlStr = "http://47.100.36.214:8111/AHPU_avigraph/ImeiServlet?imei=" + imei;
-        Imei_AsyncTask feedback_asyncTask =new Imei_AsyncTask();
-        feedback_asyncTask.execute(imeiUrlStr);
+        Imei_AsyncTask imei_asyncTask =new Imei_AsyncTask();
+        imei_asyncTask.execute(imeiUrlStr);
     }
 
     class Imei_AsyncTask extends AsyncTask<String, Integer, String> {

@@ -21,15 +21,14 @@ public class MapActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_map);
         show=(WebView)findViewById(R.id.show);
-
         show.getSettings().setJavaScriptEnabled(true);
-// 设置可以支持缩放
+        // 设置可以支持缩放
         show.getSettings().setSupportZoom(true);
-// 设置出现缩放工具
+        // 设置出现缩放工具
         show.getSettings().setBuiltInZoomControls(true);
-//扩大比例的缩放
+        //扩大比例的缩放
         show.getSettings().setUseWideViewPort(true);
-//自适应屏幕
+        //自适应屏幕
         show.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         show.getSettings().setLoadWithOverviewMode(true);
 
@@ -41,9 +40,6 @@ public class MapActivity extends AppCompatActivity {
         //开启 database storage API 功能
         show.getSettings().setDatabaseEnabled(true);
         String cacheDirPath = getFilesDir().getAbsolutePath()+APP_CACAHE_DIRNAME;
-//      String cacheDirPath = getCacheDir().getAbsolutePath()+Constant.APP_DB_DIRNAME;、
-        //设置数据库缓存路径
-//        mWebView.getSettings().setDatabasePath(cacheDirPath);
         //设置  Application Caches 缓存目录
         show.getSettings().setAppCachePath(cacheDirPath);
         //开启 Application Caches 功能

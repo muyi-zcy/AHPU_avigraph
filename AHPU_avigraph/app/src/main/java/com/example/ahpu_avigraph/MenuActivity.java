@@ -53,6 +53,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
 
+        //加载图片
         Glide.with(this)
                 .load(StartActivity.url)
                 .into(logo);

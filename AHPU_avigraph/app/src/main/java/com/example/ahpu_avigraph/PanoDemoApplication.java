@@ -21,7 +21,6 @@ public class PanoDemoApplication extends Application {
         mInstance = this;
         initEngineManager(this);
     }
-
     public void initEngineManager(Context context) {
         if (mBMapManager == null) {
             mBMapManager = new BMapManager(context);
@@ -43,6 +42,9 @@ public class PanoDemoApplication extends Application {
 
         @Override
         public void onGetPermissionState(int iError) {
+            /*
+            用于测试
+             */
             // 非零值表示key验证未通过
             if (iError != 0) {
                 // 授权Key错误：

@@ -15,7 +15,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+/*
+ * 用于用户返回在使用的过程中遇到的问题和反馈相关意见
+ */
 public class FeedbackActivity extends AppCompatActivity {
 
     EditText number;
@@ -51,10 +53,10 @@ public class FeedbackActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-    private void link(String number, String feedback) {
+                }
+private void link(String number, String feedback) {
         String feedbackUrlStr = "http://47.100.36.214:8111/AHPU_avigraph/FeedbackServlet?number="
-                + number + "&feedback=" + feedback;
+        + number + "&feedback=" + feedback;
         Feedback_AsyncTask feedback_asyncTask =new Feedback_AsyncTask();
         feedback_asyncTask.execute(feedbackUrlStr);
     }

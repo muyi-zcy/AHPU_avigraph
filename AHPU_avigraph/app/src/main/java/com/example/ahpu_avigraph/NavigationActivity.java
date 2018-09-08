@@ -97,8 +97,6 @@ public class NavigationActivity extends AppCompatActivity {
 
         endPt = new LatLng(31.3493577815, 118.4186838903);
 
-//        walkParam = new WalkNaviLaunchParam().stPt(startPt).endPt(endPt);
-
         walkParam = new WalkNaviLaunchParam();
 
         mBaiduMap.setMyLocationEnabled(true);
@@ -286,8 +284,6 @@ public class NavigationActivity extends AppCompatActivity {
             textList.add(mBaiduMap.addOverlay(overlayOptions));
         }
     }
-
-
 
     private void navigateTo(BDLocation location) {
         if (isFirstLocate) {
