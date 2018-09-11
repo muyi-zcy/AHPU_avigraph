@@ -259,18 +259,22 @@ public class Locations {
 
     static ArrayList<String> titleList = new ArrayList<String>() {
         {
+            //校门0-3
             add("安徽工程大学校门");
             add("西门&建行");
             add("小北门&优里");
             add("北门");
+            //4-7
             add("图书馆");
             add("安徽工程大学生化学院");
             add("安徽工程大学生化学院");
+            //操场7-11
             add("体育馆");
             add("老操场");
             add("新操场");
             add("风雨操场");
             add("网球场");
+            //生活12-19
             add("网络信息服务部&工程训练中心");
             add("师生活动中心");
             add("师生服务中心");
@@ -279,11 +283,13 @@ public class Locations {
             add("浴室");
             add("东苑浴室");
             add("学术报告厅");
+            //食堂20-24
             add("一食堂");
             add("二食堂");
             add("三&四食堂");
             add("五食堂");
             add("松庐餐厅");
+            //教学楼25-33
             add("1J/电气学院");
             add("2J");
             add("3J");
@@ -293,10 +299,12 @@ public class Locations {
             add("7J&艺术学院");
             add("8J&艺术学院");
             add("9J");
+            //学院34-37
             add("A座&行政楼");
             add("B座&机械学院");
             add("C座&计院\\管院\\建工");
             add("D座&纺织服装学院");
+            //女寝38-47
             add("女1");
             add("女2");
             add("女3");
@@ -307,6 +315,7 @@ public class Locations {
             add("女8");
             add("女9");
             add("女10");
+            //男寝48-65
             add("男1");
             add("男2");
             add("男5");
@@ -325,10 +334,12 @@ public class Locations {
             add("男21");
             add("男22");
             add("男25");
+            //研究生宿舍66-69
             add("研一");
             add("研二");
             add("研三");
             add("研四");
+
             add("校医院");
         }
     };

@@ -12,6 +12,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -75,9 +78,10 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_navigation);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,9 +193,6 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
     private void startWalkNavi() {
         try {
             mWNaviHelper.initNaviEngine(this, new IWEngineInitListener() {
@@ -226,7 +227,6 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void requestPermission() {
         if (Build.VERSION.SDK_INT >= 23 && !isPermissionRequested) {
@@ -322,6 +322,7 @@ public class NavigationActivity extends AppCompatActivity {
         option.setIsNeedAddress(true);
         mLocationClient.setLocOption(option);
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -355,5 +356,84 @@ public class NavigationActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+
+    /*
+        菜单
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        SubMenu doorMenu = menu.addSubMenu("校门&图书馆");
+        for (int i=0;i<5;i++){
+            doorMenu.add(0,Locations.latLngList.get(i).hashCode(),0,Locations.titleList.get(i));
+        }
+        SubMenu foodMenu = menu.addSubMenu("食堂");
+        for (int i=20;i<25;i++){
+            foodMenu.add(0,Locations.latLngList.get(i).hashCode(),0,Locations.titleList.get(i));
+        }
+        SubMenu jMenu = menu.addSubMenu("教学楼");
+        for (int i=25;i<34;i++){
+            jMenu.add(0,Locations.latLngList.get(i).hashCode(),0,Locations.titleList.get(i));
+        }
+        SubMenu zuoMenu = menu.addSubMenu("学院");
+        for (int i=34;i<38;i++){
+            zuoMenu.add(0,Locations.latLngList.get(i).hashCode(),0,Locations.titleList.get(i));
+        }
+        zuoMenu.add(0,Locations.latLngList.get(5).hashCode(),0,Locations.titleList.get(5));
+        zuoMenu.add(0,Locations.latLngList.get(6).hashCode(),0,Locations.titleList.get(6));
+
+        SubMenu nMenu = menu.addSubMenu("男寝");
+        for (int i=48;i<66;i++){
+            nMenu.add(0,Locations.latLngList.get(i).hashCode(),0,Locations.titleList.get(i));
+        }
+        SubMenu aMenu = menu.addSubMenu("女寝");
+        for (int i=38;i<48;i++){
+            aMenu.add(0,Locations.latLngList.get(i).hashCode(),0,Locations.titleList.get(i));
+        }
+        SubMenu yMenu = menu.addSubMenu("研究生宿舍");
+        for (int i=67;i<70;i++){
+            yMenu.add(0,Locations.latLngList.get(i).hashCode(),0,Locations.titleList.get(i));
+        }
+        SubMenu sMenu = menu.addSubMenu("生活");
+        for (int i=12;i<20;i++){
+            sMenu.add(0,Locations.latLngList.get(i).hashCode(),0,Locations.titleList.get(i));
+        }
+        sMenu.add(0,Locations.latLngList.get(70).hashCode(),0,Locations.titleList.get(70));
+        SubMenu tMenu = menu.addSubMenu("操场");
+        for (int i=7;i<12;i++){
+            tMenu.add(0,Locations.latLngList.get(i).hashCode(),0,Locations.titleList.get(i));
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int i=0;
+        for(i=0;i<71;i++){
+            if(item.getItemId()==Locations.latLngList.get(i).hashCode()){
+                try {
+                    endPt=Locations.latLngList.get(i);
+                    walkParam.stPt(startPt).endPt(endPt);
+                    startWalkNavi();
+                }catch(Exception e)
+                {
+                    Toast.makeText(NavigationActivity.this,"出错！！！",Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    protected boolean onPrepareOptionsPanel(View view, Menu menu) {
+        return super.onPrepareOptionsPanel(view, menu);
     }
 }
